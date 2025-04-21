@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { loginApi as adminLogin } from '/@/api/admin/user';
+// import { loginApi as adminLogin } from '/@/api/admin/user';
 import { userLoginApi } from '/@/api/index/user';
 import { setToken, clearToken } from '/@/utils/auth';
 import { UserState } from './types';
@@ -52,37 +52,37 @@ export const useUserStore = defineStore('user', {
     },
 
     // 管理员登录
-    async adminLogin(loginForm) {
-      const result = await adminLogin(loginForm);
-      console.log('result==>', result);
+  //   async adminLogin(loginForm) {
+  //     const result = await adminLogin(loginForm);
+  //     console.log('result==>', result);
 
-      if (result.code === 0) {
-        this.$patch((state) => {
-          state.admin_user_id = result.data.id;
-          state.admin_user_name = result.data.username;
-          state.admin_user_token = result.data.admin_token;
-          console.log('state==>', state);
-        });
+  //     if (result.code === 0) {
+  //       this.$patch((state) => {
+  //         state.admin_user_id = result.data.id;
+  //         state.admin_user_name = result.data.username;
+  //         state.admin_user_token = result.data.admin_token;
+  //         console.log('state==>', state);
+  //       });
 
-        localStorage.setItem(ADMIN_USER_TOKEN, result.data.admin_token);
-        localStorage.setItem(ADMIN_USER_NAME, result.data.username);
-        localStorage.setItem(ADMIN_USER_ID, result.data.id);
-      }
+  //       localStorage.setItem(ADMIN_USER_TOKEN, result.data.admin_token);
+  //       localStorage.setItem(ADMIN_USER_NAME, result.data.username);
+  //       localStorage.setItem(ADMIN_USER_ID, result.data.id);
+  //     }
 
-      return result;
-    },
-    // 管理员登出
-    async adminLogout() {
-      // await userLogout();
-      this.$patch((state) => {
-        localStorage.removeItem(ADMIN_USER_ID);
-        localStorage.removeItem(ADMIN_USER_NAME);
-        localStorage.removeItem(ADMIN_USER_TOKEN);
+  //     return result;
+  //   },
+  //   // 管理员登出
+  //   async adminLogout() {
+  //     // await userLogout();
+  //     this.$patch((state) => {
+  //       localStorage.removeItem(ADMIN_USER_ID);
+  //       localStorage.removeItem(ADMIN_USER_NAME);
+  //       localStorage.removeItem(ADMIN_USER_TOKEN);
 
-        state.admin_user_id = undefined;
-        state.admin_user_name = undefined;
-        state.admin_user_token = undefined;
-      });
-    },
+  //       state.admin_user_id = undefined;
+  //       state.admin_user_name = undefined;
+  //       state.admin_user_token = undefined;
+  //     });
+  //   },
   },
 });
